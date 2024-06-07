@@ -29,8 +29,11 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+               <!-- 前はここに波カッコ閉じのslotと記載して $slot エラーが出た -->
             </main>
+            <main class="py-4">
+            @yield('content')
+        </main>
         </div>
     </body>
 </html>

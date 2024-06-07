@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+//MediaControllerの使用を宣言
+use App\Http\Controllers\MediaController;
+
+//Mediaモデル関連のルーティングをrsourcefullで宣言
+Route::resource('media', MediaController::class);
 
 Route::get('/', function () {
     return view('welcome');

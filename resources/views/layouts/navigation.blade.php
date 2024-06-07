@@ -1,3 +1,5 @@
+
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,6 +17,10 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('media.index')" :active="request()->routeIs('media.index')">
+                        {{ __('Media') }}
+                    </x-nav-link>
+
                 </div>
             </div>
 
