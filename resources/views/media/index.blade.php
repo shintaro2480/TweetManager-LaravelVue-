@@ -13,6 +13,7 @@
 </div>
 
     <h1>Media List</h1>
+    <test-component></test-component>
     <a href="{{ route('media.create') }}" class="btn btn-primary">Upload New Media</a>
     <table class="table table-bordered mt-3">
         <tr>
