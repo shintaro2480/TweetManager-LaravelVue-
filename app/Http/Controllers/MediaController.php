@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class MediaController extends Controller
@@ -17,7 +18,8 @@ class MediaController extends Controller
     //メディアを新規投稿する
     public function create()
     {
-        return view('media.create');
+        $tags = Tag::all();
+        return view('media.create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -31,11 +33,12 @@ class MediaController extends Controller
 
         $filePath = $request->file('file')->store('uploads', 'public');
 
+
         Media::create([
             'name' => $request->name,
             'type' => $request->type,
             'file' => $filePath,
-            'tag' => json_encode($request->tag),
+            'tag_id' => $request->selected_tag,
         ]);
 
         return redirect()->route('media.index')->with('success', 'Media uploaded successfully.');

@@ -21,26 +21,37 @@
 <h1>Upload New Media</h1>
     <form action="{{ route('media.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        
+        <ul>
+            @foreach($tags as $tag)
+                <li>
+                    <label>
+                        <input type="radio" name="selected_tag" id="{{ $tag->name }}" value="{{ $tag->id }}">
+                        {{ $tag->name }}
+                    </label>
+                </li>
+            @endforeach
+        </ul>
+
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" id="name" name="name" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="type">Type:</label>
-            <select name="type" class="form-control" required>
+            <select id="type" name="type" class="form-control" required>
                 <option value="0">Image</option>
                 <option value="1">Video</option>
             </select>
         </div>
         <div class="form-group">
             <label for="file">File:</label>
-            <input type="file" name="file" class="form-control" required>
+            <input type="file" id="file" name="file" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label for="tag">Tags:</label>
-            <input type="text" name="tag[]" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
+
+        <x-primary-button class="mt-4">
+                        送信する
+                    </x-primiary-button>
     </form>
 </div>
 @endsection

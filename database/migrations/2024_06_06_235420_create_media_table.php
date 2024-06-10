@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('type'); // 0か1
             $table->string('file');
-            $table->json('tag'); // 配列の保存
+            $table->foreignId('tag_id');
             $table->timestamps();
         });
     }

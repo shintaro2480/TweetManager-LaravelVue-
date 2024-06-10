@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Media extends Model
 {
     use HasFactory;
+
+    //リレーションの設定。tagsというメソッドで、多数のTagにアクセスできる
+    public function tag() {
+        return $this->belongsTo(Tag::class);
+    }
+
+    protected $fillable = [
+        'name',
+        'type',
+        'file',
+        'tag_id',
+    ];
+
 }
+
+
