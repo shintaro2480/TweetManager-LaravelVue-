@@ -24,6 +24,7 @@ class MediaController extends Controller
 
     public function store(Request $request)
     {
+        /*
         $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|integer',
@@ -40,8 +41,10 @@ class MediaController extends Controller
             'file' => $filePath,
             'tag_id' => $request->selected_tag,
         ]);
+        */
 
-        return redirect()->route('media.index')->with('success', 'Media uploaded successfully.');
+   //     return redirect()->route('media.index')->with('success', 'Media uploaded successfully.');
+   return redirect()->route('media.index');
     }
 
     public function show(Media $media)
