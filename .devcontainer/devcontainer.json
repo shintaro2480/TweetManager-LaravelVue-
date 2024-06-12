@@ -1,13 +1,11 @@
 {
-  "name": "Laravel Project with SQLite",
+  "name": "Laravel Development Container",
   "dockerFile": "Dockerfile",
   "extensions": [
-    "mtxr.sqltools",
-    "alexcvzz.vscode-sqlite"
+    "ms-vscode.vscode-sqlite"
   ],
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash"
   },
-  "postCreateCommand": "composer install && php artisan key:generate",
-  "remoteUser": "vscode"
+  "postCreateCommand": "composer install && php artisan key:generate"
 }

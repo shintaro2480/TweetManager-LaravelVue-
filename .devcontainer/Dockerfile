@@ -1,17 +1,19 @@
-# ベースイメージを指定します。ここではPHPの公式イメージを使用しています。
-FROM mcr.microsoft.com/vscode/devcontainers/php:8.1
+# ベースイメージを指定
+FROM mcr.microsoft.com/vscode/devcontainers/php:7.4
 
-# SQLiteをインストールします。
-RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
+# SQLiteのインストール
+RUN apt-get update && \
+    apt-get install -y sqlite3 libsqlite3-dev && \
+    docker-php-ext-install pdo pdo_sqlite
 
-# Laravelの作業ディレクトリを設定します。
+# Composerのインストール
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 作業ディレクトリの設定
 WORKDIR /workspace
 
-# 必要なLaravelファイルをコピーします。
-COPY . /workspace
+# 権限の設定
+RUN chown -R vscode:vscode /workspace
 
-# Composerをインストールし、Laravelの依存関係をインストールします。
-RUN composer install
-
-# PHPの拡張機能をインストールします。
-RUN docker-php-ext-install pdo pdo_sqlite
+# 起動時に実行するコマンドを設定
+CMD ["sleep", "infinity"]
