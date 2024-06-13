@@ -1,0 +1,5 @@
+php artisan serve
+npm run dev
+public/hotファイル内を
+https://laughing-telegram-jr45pr95r7w3jjpp-5173.app.github.dev
+で上書き

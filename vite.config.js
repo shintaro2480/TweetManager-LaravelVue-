@@ -22,6 +22,14 @@ export default defineConfig({
             },
         }),
     ],
+
+    
+
+    server: {
+        hmr: {
+          host: 'https://laughing-telegram-jr45pr95r7w3jjpp-5173.app.github.dev',
+        },
+      },
     resolve: { 
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
