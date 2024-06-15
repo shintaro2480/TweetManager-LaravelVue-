@@ -122,5 +122,16 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+    
+    'providers' => [
+    // 他のプロバイダー
+    Intervention\Image\ImageServiceProvider::class,
+],
+
+'aliases' => [
+    // 他のエイリアス
+    'Image' => Intervention\Image\Facades\Image::class,
+],
+    
 
 ];

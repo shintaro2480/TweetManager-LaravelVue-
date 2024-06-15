@@ -31,20 +31,24 @@ class MediaController extends Controller
             'file' => 'required|file|mimes:jpeg,png,jpg,gif,mp4,mov,ogg,qt|max:20000',
             'tag' => 'required|array'
         ]);
-
+        */
+        //ユーザーがアップロードしたファイルを指定されたディレクトリ（uploads）に保存し、そのファイルのパスを変数（$filePath）に格納
         $filePath = $request->file('file')->store('uploads', 'public');
-
 
         Media::create([
             'name' => $request->name,
             'type' => $request->type,
             'file' => $filePath,
-            'tag_id' => $request->selected_tag,
+            'tag_id' => $request->tag_id,
         ]);
-        */
 
-   //     return redirect()->route('media.index')->with('success', 'Media uploaded successfully.');
-   return redirect()->route('media.index');
+
+        // サムネイルの生成と保存
+        $thumbnailImage = Image::make($filePath)->resize(150, 150);
+        $thumbnailPath = storage_path('app/public/thumbnails/' . $imageName);
+        $thumbnailImage->save($thumbnailPath);
+
+   return redirect()->route('media.index')->with('success', 'Media uploaded successfully.');
     }
 
     public function show(Media $media)

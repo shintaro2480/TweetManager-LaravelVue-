@@ -1,19 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-left:60px;">
 
-<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-    <x-nav-link :href="route('media.index')" :active="request()->routeIs('media.index')">
-        {{ __('Lists') }}
-    </x-nav-link>
-    <x-nav-link :href="route('media.create')" :active="request()->routeIs('media.create')">
-        {{ __('Upload') }}
-    </x-nav-link>
-</div>
+<!--ナビゲーション-->
+<x-media-nav></x-media-nav>
 
     <h1>Media List</h1>
     <test-component></test-component>
+
+
+
     <a href="{{ route('media.create') }}" class="btn btn-primary">Upload New Media</a>
     <table class="table table-bordered mt-3">
         <tr>

@@ -6,32 +6,22 @@
 
 
 
-<div class="container">
+<div class="container" style="margin-left:60px;">
 
-<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-    <x-nav-link :href="route('media.index')" :active="request()->routeIs('media.index')">
-        {{ __('Lists') }}
-    </x-nav-link>
-    <x-nav-link :href="route('media.create')" :active="request()->routeIs('media.create')">
-        {{ __('Upload') }}
-    </x-nav-link>
-</div>
-
+<!--ナビゲーション-->
+<x-media-nav></x-media-nav>
 
 <h1>Upload New Media</h1>
     <form action="{{ route('media.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
-        <ul>
-            @foreach($tags as $tag)
-                <li>
-                    <label>
-                        <input type="radio" name="selected_tag" id="{{ $tag->name }}" value="{{ $tag->id }}">
-                        {{ $tag->name }}
-                    </label>
-                </li>
+        <label for="tags">Select a Tag:</label>
+            @foreach ($tags as $tag)
+                <div class="inline-block">
+                    <input type="radio" id="tag_{{ $tag->id }}" name="tag_id" value="{{ $tag->id }}" required>
+                    <label for="tag_{{ $tag->id }}">{{ $tag->name }}</label>
+                </div>
             @endforeach
-        </ul>
 
         <div class="form-group">
             <label for="name">Name:</label>
