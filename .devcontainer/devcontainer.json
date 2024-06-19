@@ -1,0 +1,19 @@
+{
+  "name": "Laravel Development",
+  "dockerFile": "Dockerfile",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "felixfbecker.php-debug",
+        "bmewburn.vscode-intelephense-client",
+        "alexcvzz.vscode-sqlite"  // SQLite extension
+      ]
+    }
+  },
+  "postCreateCommand": "composer install",
+  "remoteUser": "vscode"
+}
