@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // 他のシーダークラスがある場合はそれらも呼び出せます。
         $this->call(TagSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }

@@ -33,6 +33,7 @@ class MediaController extends Controller
 
     public function store(Request $request)
     {
+        //バリデート
         /*
         $request->validate([
             'name' => 'required|string|max:255',
@@ -42,70 +43,51 @@ class MediaController extends Controller
         ]);
         */
 
+        $image = request()->file('image');
+//        request()->file('image')->move('storage/images', $name);
+//        $post->image = $name;
+
         // アップロードされたファイルを取得し、それを$imageに代入。この変数は、Illuminate\Http\UploadedFileオブジェクトの型となっており、
         //この型からはファイル名、ファイルサイズ等情報の取得や、ファイルの移動・保存メソッドを実行できる
-        $image = $request->file('file');
+        $imageName = request()->file('file')->getClientOriginalName();
 
         //ユーザーがアップロードしたファイルを指定されたディレクトリ（uploads）に保存し、そのファイルのパスを変数（$filePath）に格納
-        $filePath = $request->file('file')->store('uploads', 'public');
+        //$filePathには、"uploads/example.txt"という文字列が保存されている
+//        $filePath = $request->file('file')->store('uploads', 'public');
+$name = date('Ymd_His').'_'.$imageName;
+$cat = request()->file('file')->move('storage/uploads', $name);
+//            $post->image = $name;
 
+//        $filePath = date('Ymd_His').'_'.$filePath;
+
+        // オリジナル画像のファイル名を生成
+        $originalName = date('Ymd_His') . $imageName;
         // サムネイル画像のファイル名を生成
-        $thumbnailName = time() . '_thumb.' . $image->getClientOriginalExtension();
+        $thumbnailName = '_thumb.' . date('Ymd_His') .  $imageName;
 
         //アップロードした画像の名前とともに、大量代入でデータベース登録
         Media::create([
-            'name' => $request->name,
+            'name' => $name,
             'type' => $request->type,
-            'file' => $filePath,
+            'file' => $thumbnailName,
             'tag_id' => $request->tag_id,
         ]);
 
+        //DriverからImageManagerインスタンスを生成
         $manager = new ImageManager(new Driver());
-        $image = $manager->read($image);
+        //$image(フォームから送られた画像)を読み込む
+//        $load = $request->file('file');
+        $image = $manager->read($cat);
 
-// scale to fixed height
-$image->scale(height: 300); // 400 x 300
+        // scale to fixed height
+        $image->scale(width: 300);
+        $saveThumbnailPath = 'app/public/uploads/' . $thumbnailName;
 
-// scale to 200 x 100 pixel
-$image->scale(200, 100); // 200 x 150
+        $image->save(storage_path($saveThumbnailPath));
+//        $image->save(storage_path('app/public/uploads/hoge-flip223.png'));
+//        $image->save(storage_path($saveThumbnailPath));
 
-$image->save(storage_path('app/public/hoge-flip222.png'));
-
-//Storage::disk('public')->put($thumbnailName, $image);
-
-//$image->store('uploads', 'public');
-
-/*
-
-        $thumbnail = $this->manager->make($image)
-        ->resize(150, 150, function ($constraint) {
-            $constraint->aspectRatio();
-        })
-        ->stream();
-
-*/
-
-//        $thumbnailfilePath = $thumbnail->store('uploads', 'public');
-
-        /*
-    Storage::disk('public')->put($thumbnailName, $thumbnail);
-*/
-
-        // サムネイルの生成と保存
-        // 希望するドライバーで新しいマネージャー インスタンスを作成する
-        //$manager = new ImageManager(new Driver());
-        /*
-        $thumbnailImage = Image::make($filePath)->resize(150, 150);
-        $thumbnailPath = storage_path('app/public/thumbnails/' . $filePath);
-        $thumbnailImage->save($thumbnailPath);
-        */
-
-        //$image = ImageManager::imagick()->read('images/example.jpg');
-
-// resize to 300 x 200 pixel
-//$image->resize(300, 200);
-
-   return redirect()->route('media.index')->with('success', 'Media uploaded successfully.');
+        return redirect()->route('media.index')->with('success', 'Media uploaded successfully.');
     }
 
     public function show(Media $media)
