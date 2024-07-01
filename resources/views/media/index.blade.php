@@ -26,8 +26,9 @@
             <td>{{ $item->id }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->type == 0 ? 'Image' : 'Video' }}</td>
-            <td><img src="{{ asset('app/public/uploads/' . $item->file) }}"></td>
-            <td></td>
+            <td><img src="{{ asset('storage/uploads/' . $item->file) }}"></td>
+            <td>{{ $item->tag->name }}</td>
+            <td><img src="http://127.0.0.1:8000/public/storage/uploads/test.png"></td>
             <td>
                 <a href="{{ route('media.show', $item->id) }}" class="btn btn-info">View</a>
                 <a href="{{ route('media.edit', $item->id) }}" class="btn btn-warning">Edit</a>

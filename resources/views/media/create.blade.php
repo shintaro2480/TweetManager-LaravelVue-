@@ -11,8 +11,14 @@
 <!--ナビゲーション-->
 <x-media-nav></x-media-nav>
 
+
+
 <h1>Upload New Media</h1>
-    <form action="{{ route('media.store') }}" method="POST" enctype="multipart/form-data">
+
+<upload-media></upload-media>
+
+
+<form action="{{ route('media.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <label for="tags">Select a Tag:</label>

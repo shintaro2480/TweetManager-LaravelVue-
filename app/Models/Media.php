@@ -11,7 +11,7 @@ class Media extends Model
 
     //リレーションの設定。tagsというメソッドで、多数のTagにアクセスできる
     public function tag() {
-        return $this->belongsTo(Tag::class);
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
 
     protected $fillable = [

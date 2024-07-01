@@ -20,7 +20,7 @@ class MediaController extends Controller
     //全ての投稿を表示させる
     public function index()
     {
-        $media = Media::all();
+        $media = Media::with('tag')->get();
         return view('media.index', compact('media'));
     }
     
@@ -81,7 +81,7 @@ $cat = request()->file('file')->move('storage/uploads', $name);
 
         // scale to fixed height
         $image->scale(width: 300);
-        $saveThumbnailPath = 'app/public/uploads/' . $thumbnailName;
+        $saveThumbnailPath = 'uploads/' . $thumbnailName;
 
         $image->save(storage_path($saveThumbnailPath));
 //        $image->save(storage_path('app/public/uploads/hoge-flip223.png'));
