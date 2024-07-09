@@ -26,7 +26,7 @@
             <td>{{ $item->id }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->type == 0 ? 'Image' : 'Video' }}</td>
-            <td><img src="{{ asset('storage/uploads/' . $item->file) }}"></td>
+            <td><img src="{{ asset('storage/thumbnail/' . $item->file) }}"></td>
             <td>{{ $item->tag->name }}</td>
             <td><img src="http://127.0.0.1:8000/public/storage/uploads/test.png"></td>
             <td>

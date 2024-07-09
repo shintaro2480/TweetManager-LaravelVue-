@@ -55,7 +55,7 @@ class MediaController extends Controller
         //$filePathには、"uploads/example.txt"という文字列が保存されている
 //        $filePath = $request->file('file')->store('uploads', 'public');
 $name = date('Ymd_His').'_'.$imageName;
-$cat = request()->file('file')->move('storage/uploads', $name);
+$cat = request()->file('file')->move('storage/uploads/', $name);
 //            $post->image = $name;
 
 //        $filePath = date('Ymd_His').'_'.$filePath;
@@ -81,9 +81,10 @@ $cat = request()->file('file')->move('storage/uploads', $name);
 
         // scale to fixed height
         $image->scale(width: 300);
-        $saveThumbnailPath = 'uploads/' . $thumbnailName;
+        $saveThumbnailPath = 'storage/thumbnail/' . $thumbnailName;
 
-        $image->save(storage_path($saveThumbnailPath));
+//        $image->save('storage/uploads/', $thumbnailName);
+        $image->save($saveThumbnailPath);
 //        $image->save(storage_path('app/public/uploads/hoge-flip223.png'));
 //        $image->save(storage_path($saveThumbnailPath));
 
